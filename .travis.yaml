@@ -28,4 +28,4 @@ script:
   - npm run test-cov
 
 after_success:
-    - 'npm run merge-report && cat coverage/lcov.info | ./node_modules/.bin/coveralls'
+  - 'npm run merge-report && cat coverage/lcov.info | ./node_modules/.bin/coveralls'
