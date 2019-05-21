@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = {
   root: {
@@ -25,15 +27,18 @@ function RegistryToolBar(props: any) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar variant="dense">
-          <Typography className={classes.grow} variant="h6" color="inherit" align="left">
-            Emneord
-          </Typography>
-          <Button color="inherit">Ny</Button>
-          <Button color="inherit">Lagre</Button>
-        </Toolbar>
-      </AppBar>
+        <AppBar position="static" color="default">
+            <Toolbar variant="dense">
+                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <MenuIcon />
+                </IconButton>
+                <Typography className={classes.grow} variant="h6" color="inherit" align="left">
+                Emneord
+                </Typography>
+                <Button color="inherit">Ny</Button>
+                <Button color="inherit">Lagre</Button>
+            </Toolbar>
+        </AppBar>
     </div>
   );
 }
