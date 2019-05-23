@@ -18,7 +18,7 @@ const styles = {
 };
 
 
-function SimpleAppBar(props: any) {
+const SimpleAppBar = (props: any) => {
   const { classes } = props;
 
   return (

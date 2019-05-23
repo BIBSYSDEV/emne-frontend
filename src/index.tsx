@@ -9,8 +9,6 @@ import schema from './schema.json';
 import uischema from './uischema.json';
 import { Actions, jsonformsReducer, JsonFormsState } from '@jsonforms/core';
 import { materialCells, materialRenderers } from '@jsonforms/material-renderers';
-import RatingControl from './RatingControl';
-import ratingControlTester from './ratingControlTester'
 
 const data = {
     "@context": "something",
@@ -39,18 +37,20 @@ const initState: JsonFormsState = {
     }
   }
 
+const search = window.location.search;
+const params = new URLSearchParams(search);
+const identifier = params.get('identifier');
+const path = window.location.pathname.substring(1).split("/");
+
 const rootReducer: Reducer<JsonFormsState, AnyAction> = combineReducers({ jsonforms: jsonformsReducer() });
 const store = createStore(rootReducer, initState);
 
 store.dispatch(Actions.init(data, schema, uischema));
 
 
-// Uncomment this line (and respective import) to register our custom renderer
-store.dispatch(Actions.registerRenderer(ratingControlTester, RatingControl));
-
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App registry={path[0]}/>
   </Provider>,
   document.getElementById('root')
 );

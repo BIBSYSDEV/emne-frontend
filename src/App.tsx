@@ -45,75 +45,75 @@ const styles = createStyles({
 
 export interface AppProps extends WithStyles<typeof styles> {
   dataAsString: string;
+  registry: string;
 }
 
-class App extends React.Component<AppProps> {
+const App = (props:AppProps) => {
     
-    handleNew = () => { 
+    const { classes, dataAsString, registry } = props;
+    
+    const handleNew = () => { 
         alert('Nytt emneord');
     }
 
-    handlePersist = () => {
-        const { dataAsString } = this.props;
+    const handlePersist = () => {
+        const { dataAsString, registry } = props;
+        alert('registry: ' + registry);
         alert(dataAsString);
     }
-
-    render() {
-        const { classes, dataAsString } = this.props;
     
-        const renderToolBar = (classes: any, dataAsStringprops:string) => {
-            
-            return (
-                <div className={classes.toolBar}>
-                    <AppBar position="static" color="default">
-                        <Toolbar variant="dense">
-                            <Typography className={classes.grow} variant="h6" color="inherit" align="left">
-                            Emneord
-                            </Typography>
-                            <Button onClick={this.handleNew} color="inherit">Ny</Button>
-                            <Button onClick={this.handlePersist} color="inherit">Lagre</Button>
-                        </Toolbar>
-                    </AppBar>
-                </div>
-            );
-        }
-    
+    const renderToolBar = (classes:any) => {
+        
         return (
-        <div>
-            <SimpleAppBar />
-            <Grid container justify={'center'} spacing={16} className={classes.container}>
-            <Grid item sm={9}>
-                <Typography
-                variant={'display1'}
-                className={classes.title}
-                >
-                { renderToolBar(classes, dataAsString)}
-                </Typography>
-                <div className={classes.demoform}>
-                <JsonForms/>
-                </div>
-                <Typography
-                variant={'display1'}
-                className={classes.title}
-                >
-                { renderToolBar(classes, dataAsString)}
-                </Typography>
-            </Grid>
-            <Grid item sm={9}>
-                <Typography
-                variant={'display1'}
-                className={classes.title}
-                >
-                Data
-                </Typography>
-                <div className={classes.dataContent}>
-                <pre>{dataAsString}</pre>
-                </div>
-            </Grid>
-            </Grid>
-        </div>
+            <div className={classes.toolBar}>
+                <AppBar position="static" color="default">
+                    <Toolbar variant="dense">
+                        <Typography className={classes.grow} variant="h6" color="inherit" align="left">
+                        Emneord ({registry})
+                        </Typography>
+                        <Button onClick={handleNew} color="inherit">Ny</Button>
+                        <Button onClick={handlePersist} color="inherit">Lagre</Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
         );
     }
+    
+    return (
+    <div>
+        <SimpleAppBar />
+        <Grid container justify={'center'} spacing={16} className={classes.container}>
+        <Grid item sm={9}>
+            <Typography
+            variant={'display1'}
+            className={classes.title}
+            >
+            { renderToolBar(classes)}
+            </Typography>
+            <div className={classes.demoform}>
+            <JsonForms/>
+            </div>
+            <Typography
+            variant={'display1'}
+            className={classes.title}
+            >
+            { renderToolBar(classes)}
+            </Typography>
+        </Grid>
+        <Grid item sm={9}>
+            <Typography
+            variant={'display1'}
+            className={classes.title}
+            >
+            Data
+            </Typography>
+            <div className={classes.dataContent}>
+            <pre>{dataAsString}</pre>
+            </div>
+        </Grid>
+        </Grid>
+    </div>
+    );
 }
 
 const mapStateToProps = (state: JsonFormsState) => {
