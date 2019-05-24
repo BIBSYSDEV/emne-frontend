@@ -50,16 +50,19 @@ export interface AppProps extends WithStyles<typeof styles> {
 
 const App = (props:AppProps) => {
     
+    const [isAuthenticated, setAuthenticated] = useState(false);
+
     const { classes, dataAsString, registry } = props;
     
     const handleNew = () => { 
-        alert('Nytt emneord');
+        console.log('Nytt emneord');
     }
 
     const handlePersist = () => {
         const { dataAsString, registry } = props;
-        alert('registry: ' + registry);
-        alert(dataAsString);
+        console.log('Persisting:');
+        console.log('registry: ' + registry);
+        console.log(dataAsString);
     }
     
     const renderToolBar = (classes:any) => {
